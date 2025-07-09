@@ -26,12 +26,13 @@ const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Card className="h-full group hover:shadow-cyber transition-all duration-300 hover:-translate-y-1">
       <CardHeader className="p-0">
-        <div className="relative">
-          <div className="h-48 bg-cyber-gradient rounded-t-lg flex items-center justify-center">
-            <div className="text-white text-4xl font-bold opacity-20">
-              {course.name.charAt(0).toUpperCase()}
-            </div>
-          </div>
+        <div className="relative overflow-hidden">
+          <img 
+            src={course.image || 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop'} 
+            alt={course.name}
+            className="h-48 w-full object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-cyber-gradient opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
           <Badge 
             variant={course.status === 'Ativo' ? 'default' : 'secondary'}
             className="absolute top-2 right-2 bg-primary text-primary-foreground"
@@ -69,15 +70,15 @@ const CourseCard = ({ course }: CourseCardProps) => {
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span>4.8</span>
+              <span>{course.rating || 4.8}</span>
             </div>
             <div className="flex items-center gap-1">
               <Users className="h-4 w-4" />
-              <span>234</span>
+              <span>{course.students || 234}</span>
             </div>
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              <span>40h</span>
+              <span>{course.duration || '40h'}</span>
             </div>
           </div>
         </div>
